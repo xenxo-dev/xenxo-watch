@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Negro puro: en AMOLED los píxeles negros están apagados = 0 consumo -->
+    <style name="Theme.Xenxo" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowShowWallpaper">false</item>
+        <!-- En Wear OS deslizar a la derecha cierra la ventana: chocaría con arrastrar el panal.
+             El panal y los menús se cierran con el botón, como en el Apple Watch. -->
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+</resources>

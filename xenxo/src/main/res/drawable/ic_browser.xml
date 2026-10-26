@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Navegador xenxo": círculo azul zafiro (#0A84FF) con icono de brújula/globo web blanco -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#0A84FF" android:pathData="M24,1a23,23 0,1 1,0 46a23,23 0,1 1,0 -46z" />
+    <!-- Aguja / brújula de navegación -->
+    <path android:fillColor="#FFFFFF" android:pathData="M24,11c-7.18,0 -13,5.82 -13,13s5.82,13 13,13 13,-5.82 13,-13 -5.82,-13 -13,-13zM24,34.5c-5.8,0 -10.5,-4.7 -10.5,-10.5S18.2,13.5 24,13.5 34.5,18.2 34.5,24 29.8,34.5 24,34.5zM29.5,18.5l-8,3.5 -3.5,8 8,-3.5 3.5,-8zM24,22.5c0.83,0 1.5,0.67 1.5,1.5s-0.67,1.5 -1.5,1.5 -1.5,-0.67 -1.5,-1.5 0.67,-1.5 1.5,-1.5z" />
+</vector>

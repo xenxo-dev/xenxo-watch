@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Energía xenxo": círculo naranja (paleta tipo openGym) con rayo blanco -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#FF9F0A" android:pathData="M24,1a23,23 0,1 1,0 46a23,23 0,1 1,0 -46z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M26.5,9L15,26.5h8.5L21.5,39 33,21.5h-8.5z" />
+</vector>

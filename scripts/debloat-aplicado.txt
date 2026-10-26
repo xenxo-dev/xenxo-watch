@@ -1,0 +1,12 @@
+﻿com.xiaomi.wear.xiaoai
+com.xiaomi.wear.anonymous.xiaoai
+com.xiaomi.wear.hotwordle
+com.onetrack.watch
+com.xiaomi.wear.market
+com.xiaomi.wear.lpa
+com.xiaomi.wear.card
+com.xiaomi.mihome
+com.xiaomi.wear.tutorial
+com.google.android.clockwork.gestures.tutorial
+com.google.android.apps.wearable.retailattractloop
+com.longcheertel.midtest

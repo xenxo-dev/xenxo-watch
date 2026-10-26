@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Intervalos xenxo": círculo verde lima (#30D158) con icono de cronómetro y rayo -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#30D158" android:pathData="M24,1a23,23 0,1 1,0 46a23,23 0,1 1,0 -46z" />
+    <!-- Cronómetro blanco -->
+    <path android:fillColor="#FFFFFF" android:pathData="M24,10c-6.6,0 -12,5.4 -12,12s5.4,12 12,12 12,-5.4 12,-12 -5.4,-12 -12,-12zM24,31.5c-5.2,0 -9.5,-4.3 -9.5,-9.5s4.3,-9.5 9.5,-9.5 9.5,4.3 9.5,9.5 -4.3,9.5 -9.5,9.5zM22.5,5h3v3h-3zM32.5,8.5l2.2,-2.2 2.1,2.1 -2.2,2.2z" />
+    <!-- Rayo interior -->
+    <path android:fillColor="#FFFFFF" android:pathData="M25,14L19,23h4.5L22,29 28,20h-4.5z" />
+</vector>

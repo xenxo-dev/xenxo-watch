@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <!-- Ajustes del sistema y perfiles de energía (:power)
+         pm grant io.xenxo android.permission.WRITE_SECURE_SETTINGS
+         appops set io.xenxo WRITE_SETTINGS allow -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Vibración háptica para fin de descansos en gimnasio e intervalos -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="com.xiaomi.wear.permission.READ_FITNESS" />
+    <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA" />
+
+    <!-- Permiso de firma para que solo apps de xenxo (misma firma) puedan leer HealthProvider -->
+    <permission
+        android:name="io.xenxo.permission.READ_HEALTH"
+        android:protectionLevel="signature" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Xenxo">
+
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
+        <!-- Vista con pestañas (sin icono en el panal: cada sección tiene su propia "app" abajo) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name" />
+
+        <!-- Cada sección, su "app" en el panal con nombre e icono propios. Tareas separadas para que
+             se comporten como apps distintas en recientes y al volver con el botón. -->
+        <activity
+            android:name=".EnergyActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_energy"
+            android:label="@string/app_energy"
+            android:taskAffinity="io.xenxo.energy">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".GymActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_gym"
+            android:label="@string/app_gym"
+            android:taskAffinity="io.xenxo.gym">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HealthActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_health"
+            android:label="@string/app_health"
+            android:taskAffinity="io.xenxo.health">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MusicActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_music"
+            android:label="@string/app_music"
+            android:taskAffinity="io.xenxo.music">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PadelHistoryActivity"
+            android:exported="false"
+            android:icon="@drawable/ic_padel"
+            android:label="@string/padel_app"
+            android:taskAffinity="io.xenxo.padel" />
+
+        <!-- Clases de Wear OS del propio reloj (modo ambiente del marcador). No van en el APK. -->
+        <uses-library android:name="com.google.android.wearable" android:required="false" />
+
+        <!-- Marcador de pádel: actividad propia con icono propio en el panal ("Pádel") y modo ambiente.
+             Tarea separada de la app principal para entrar y salir de la pista sin pasar por las pestañas. -->
+        <activity
+            android:name=".padel.PadelActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_padel"
+            android:label="@string/padel_app"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.xenxo.padel"
+            android:theme="@style/Theme.Xenxo.Padel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Navegador Web Chromium / WebView con scroll por corona háptica y resolución de portales cautivos -->
+        <activity
+            android:name=".browser.BrowserActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_browser"
+            android:label="@string/app_browser"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.xenxo.browser"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+        <!-- Tesla Suite: Control Remoto del Vehículo -->
+        <activity
+            android:name=".tesla.TeslaActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_tesla"
+            android:label="@string/app_tesla"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.xenxo.tesla">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Entrenador de Intervalos HIIT / Tabata / EMOM con pulsómetro óptico PPG -->
+        <activity
+            android:name=".intervals.IntervalsActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_intervals"
+            android:label="@string/app_intervals"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.xenxo.intervals">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Suite Outdoor: Altímetro Barométrico y Brújula Digital con calibración por corona -->
+        <activity
+            android:name=".outdoor.OutdoorActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_outdoor"
+            android:label="@string/app_outdoor"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.xenxo.outdoor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Mando Multimedia y de Presentaciones -->
+        <activity
+            android:name=".remote.RemoteActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_remote"
+            android:label="@string/app_remote"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.xenxo.remote">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Videojuego "Ruta xenxo" (xenxoRun): Corredor infinito de 3 carriles neón -->
+        <activity
+            android:name=".game.GameActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_game"
+            android:label="@string/app_game"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.xenxo.game"
+            android:theme="@style/Theme.Xenxo.Game">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Wake-on-LAN por Wi-Fi para encendido de servidores y homelab -->
+        <activity
+            android:name=".wol.WolActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_wol"
+            android:label="@string/app_wol"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.xenxo.wol">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Notas offline con notas de voz y plantillas rápidas -->
+        <activity
+            android:name=".notes.NotesActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_notes"
+            android:label="@string/app_notes"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.xenxo.notes">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Tesla Key Card: Servicio Host Card Emulation (HCE) 100% Offline con curva secp256r1 -->
+        <service
+            android:name=".tesla.TeslaKeyApduService"
+            android:exported="true"
+            android:permission="android.permission.BIND_NFC_SERVICE">
+            <intent-filter>
+                <action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.cardemulation.host_apdu_service"
+                android:resource="@xml/tesla_apdu_service" />
+        </service>
+
+        <receiver
+            android:name=".sync.SyncReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="io.xenxo.SYNC" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Respuesta del móvil a la sincronización (io.xenxo.sync); la despierta Google Play Services -->
+        <service
+            android:name=".sync.WatchSyncListener"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <action android:name="com.google.android.gms.wearable.CHANNEL_EVENT" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/xenxo/v1" />
+            </intent-filter>
+        </service>
+
+        <!-- Vibración de fin de descanso del gimnasio (alarma única, ver RestAlarm) -->
+        <receiver
+            android:name=".gym.RestAlarm"
+            android:exported="false" />
+
+        <!-- Alarma exacta para cambios de fase en intervalos con pantalla apagada -->
+        <receiver
+            android:name=".intervals.IntervalAlarm"
+            android:exported="false" />
+
+        <receiver
+            android:name=".power.BatteryReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Proveedor de métricas de salud (pasos, pulso, kcal, km) para las esferas de xenxo Launcher -->
+        <provider
+            android:name=".health.HealthProvider"
+            android:authorities="io.xenxo.health.provider"
+            android:permission="io.xenxo.permission.READ_HEALTH"
+            android:exported="true" />
+
+    </application>
+</manifest>

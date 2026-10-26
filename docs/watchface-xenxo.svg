@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 560" font-family="Roboto, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="860" height="560" fill="#e9e9ec"/>
+
+  <!-- ===================== ACTIVA ===================== -->
+  <text x="214" y="34" text-anchor="middle" font-size="15" fill="#555" font-weight="500">Activa</text>
+  <rect x="30" y="50" width="368" height="448" rx="64" fill="#000"/>
+  <g transform="translate(30,50)">
+    <!-- fila superior: fecha + batería -->
+    <text x="34" y="52" font-size="17" fill="#9E9E9E" letter-spacing="0.3">Mié 21 oct</text>
+    <g transform="translate(272,38)">
+      <rect x="0" y="0" width="28" height="15" rx="3" fill="none" stroke="#9E9E9E" stroke-width="1.6"/>
+      <rect x="28.5" y="4.5" width="2.5" height="6" rx="1" fill="#9E9E9E"/>
+      <rect x="2.5" y="2.5" width="10.5" height="10" rx="1.5" fill="#9E9E9E"/>
+      <text x="40" y="13" font-size="16" fill="#9E9E9E">44%</text>
+    </g>
+
+    <!-- hora -->
+    <text x="30" y="168" font-size="112" font-weight="300" fill="#FFFFFF" letter-spacing="-3">13:52</text>
+
+    <!-- pasos: dato principal con barra hacia el objetivo -->
+    <text x="34" y="236" font-size="40" font-weight="500" fill="#FFB300">7.750</text>
+    <text x="158" y="236" font-size="17" fill="#757575">/ 10.000 pasos</text>
+    <rect x="34" y="252" width="300" height="6" rx="3" fill="#2A2A2A"/>
+    <rect x="34" y="252" width="232" height="6" rx="3" fill="#FFB300"/>
+
+    <!-- separador -->
+    <line x1="34" y1="292" x2="334" y2="292" stroke="#1E1E1E" stroke-width="1.5"/>
+
+    <!-- tres datos secundarios -->
+    <g>
+      <text x="34"  y="348" font-size="32" font-weight="500" fill="#FF7043">349</text>
+      <text x="34"  y="374" font-size="14" fill="#757575" letter-spacing="1.2">KCAL</text>
+
+      <text x="146" y="348" font-size="32" font-weight="500" fill="#26C6DA">4,9</text>
+      <text x="146" y="374" font-size="14" fill="#757575" letter-spacing="1.2">KM</text>
+
+      <g transform="translate(246,322)">
+        <path d="M8 4.5c-1.8-3-6.5-2.6-7.3 1-.6 2.7 1.2 5 7.3 9.8 6.1-4.8 7.9-7.1 7.3-9.8-.8-3.6-5.5-4-7.3-1z" fill="#EF5350"/>
+      </g>
+      <text x="268" y="348" font-size="32" font-weight="500" fill="#EF5350">60</text>
+      <text x="246" y="374" font-size="14" fill="#757575" letter-spacing="1.2">PPM</text>
+    </g>
+
+    <!-- marca discreta -->
+    <text x="184" y="420" text-anchor="middle" font-size="12" fill="#3A3A3A" letter-spacing="2">XENXO</text>
+  </g>
+
+  <!-- ===================== AMBIENTE ===================== -->
+  <text x="646" y="34" text-anchor="middle" font-size="15" fill="#555" font-weight="500">Ambiente (pantalla en reposo)</text>
+  <rect x="462" y="50" width="368" height="448" rx="64" fill="#000"/>
+  <g transform="translate(462,50)">
+    <text x="34" y="52" font-size="17" fill="#5A5A5A">Mié 21 oct</text>
+    <text x="30" y="168" font-size="112" font-weight="300" fill="none" stroke="#BDBDBD" stroke-width="1.6" letter-spacing="-3">13:52</text>
+    <text x="34" y="236" font-size="22" fill="#5A5A5A">7.750 pasos</text>
+  </g>
+
+  <text x="430" y="535" text-anchor="middle" font-size="13" fill="#777">Esfera xenxo · 368×448 · negro puro, sin segundos, refresco 1 vez/min</text>
+</svg>

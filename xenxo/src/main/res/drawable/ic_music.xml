@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Música xenxo": círculo magenta/rojo (paleta openGym / Apple Music) con notas musicales blancas -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#FF2D55" android:pathData="M24,1a23,23 0,1 1,0 46a23,23 0,1 1,0 -46z" />
+    <!-- Viga superior conectora -->
+    <path android:fillColor="#FFFFFF" android:pathData="M19,12h13v4.5h-13z" />
+    <!-- Mástil izquierdo -->
+    <path android:fillColor="#FFFFFF" android:pathData="M19,13h3v16h-3z" />
+    <!-- Mástil derecho -->
+    <path android:fillColor="#FFFFFF" android:pathData="M29,13h3v13h-3z" />
+    <!-- Cabeza nota izquierda -->
+    <path android:fillColor="#FFFFFF" android:pathData="M17.5,29m-4.5,0a4.5,3.5 0,1,1 9,0a4.5,3.5 0,1,1 -9,0" />
+    <!-- Cabeza nota derecha -->
+    <path android:fillColor="#FFFFFF" android:pathData="M27.5,26m-4.5,0a4.5,3.5 0,1,1 9,0a4.5,3.5 0,1,1 -9,0" />
+</vector>

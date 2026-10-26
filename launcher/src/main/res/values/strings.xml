@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Respaldo en inglés. Los textos en castellano están en values-es/: con la lista es-ES,en-US, Android
+     prefiere values-en a un values/ sin etiqueta, así que el castellano necesita su carpeta propia. -->
+<resources>
+    <string name="app_name">xenxoLauncher</string>
+    <string name="face_ultra">xenxo Ultra</string>
+    <string name="face_digital">xenxo Digital</string>
+    <string name="face_analog">xenxo Analog</string>
+    <string name="menu_title">xenxo</string>
+    <string name="menu_show_hidden">Show hidden apps</string>
+    <string name="menu_language">System language</string>
+    <string name="menu_settings">Settings</string>
+
+    <string name="set_brightness">Brightness: %1$d %%</string>
+    <string name="set_brightness_title">Brightness</string>
+    <string name="set_brightness_hint">Crown or − / +</string>
+    <string name="set_brightness_hint_auto">Auto brightness is on: the system will keep adjusting it</string>
+    <string name="set_auto">Auto brightness: %1$s</string>
+    <string name="set_timeout">Screen off after: %1$d s</string>
+    <string name="set_wake">Tilt to wake: %1$s</string>
+    <string name="set_scans">Background BT/Wi-Fi scans: %1$s</string>
+    <string name="set_wifi_wakeup">Wi-Fi turns on by itself: %1$s</string>
+    <string name="set_battery">Battery: %1$d %%</string>
+    <string name="set_adb_wifi">⚠ ADB over Wi-Fi is on: drains the battery</string>
+    <string name="set_language">Language: %1$s</string>
+    <string name="set_display_more">Always-on screen and more…</string>
+    <string name="set_all">All watch settings</string>
+    <string name="yes">On</string>
+    <string name="no">Off</string>
+    <string name="set_no_permission">Permissions are missing. From the PC:\nadb shell appops set io.xenxo.launcher WRITE_SETTINGS allow</string>
+    <string name="set_no_secure">“Tilt to wake” needs a permission. From the PC:\nadb shell pm grant io.xenxo.launcher android.permission.WRITE_SECURE_SETTINGS</string>
+    <string name="menu_close">Close</string>
+
+    <string name="app_pin">Pin to centre</string>
+    <string name="app_unpin">Unpin from centre</string>
+    <string name="app_move_in">Move closer to centre</string>
+    <string name="app_hide">Hide</string>
+    <string name="app_info">App info</string>
+    <string name="app_drag_hint">To move it: press and hold its icon, then drag it</string>
+
+    <string name="lang_spanish">Spanish (fallback: English)</string>
+    <string name="lang_english">English (factory)</string>
+    <string name="lang_current">Now: %1$s</string>
+    <string name="lang_no_permission">Permissions are missing. From the PC:\nadb shell pm grant io.xenxo.launcher android.permission.CHANGE_CONFIGURATION\nadb shell appops set io.xenxo.launcher WRITE_SETTINGS allow</string>
+    <string name="lang_failed">Could not change the language: %1$s</string>
+    <string name="hidden_shown">Hidden apps are visible again</string>
+</resources>

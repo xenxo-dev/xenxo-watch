@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Castellano de España; values/ es el respaldo en inglés -->
+<resources>
+    <string name="app_name">xenxoLauncher</string>
+    <string name="face_ultra">xenxo Ultra</string>
+    <string name="face_digital">xenxo Digital</string>
+    <string name="face_analog">xenxo Analógica</string>
+
+    <string name="menu_title">xenxo</string>
+    <string name="menu_show_hidden">Mostrar apps ocultas</string>
+    <string name="menu_language">Idioma del sistema</string>
+    <string name="menu_settings">Ajustes</string>
+
+    <string name="set_brightness">Brillo: %1$d %%</string>
+    <string name="set_brightness_title">Brillo</string>
+    <string name="set_brightness_hint">Corona o − / +</string>
+    <string name="set_brightness_hint_auto">Brillo automático activado: el sistema lo irá ajustando</string>
+    <string name="set_auto">Brillo automático: %1$s</string>
+    <string name="set_timeout">Apagar pantalla tras: %1$d s</string>
+    <string name="set_wake">Levantar muñeca: %1$s</string>
+    <string name="set_scans">Búsquedas BT/Wi-Fi de fondo: %1$s</string>
+    <string name="set_wifi_wakeup">Wi-Fi se enciende solo: %1$s</string>
+    <string name="set_battery">Batería: %1$d %%</string>
+    <string name="set_adb_wifi">⚠ ADB por Wi-Fi activo: gasta batería</string>
+    <string name="set_language">Idioma: %1$s</string>
+    <string name="set_display_more">Pantalla en reposo y más…</string>
+    <string name="set_all">Todos los ajustes del reloj</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="set_no_permission">Faltan permisos. Desde el PC:\nadb shell appops set io.xenxo.launcher WRITE_SETTINGS allow</string>
+    <string name="set_no_secure">Para «Levantar muñeca» falta un permiso. Desde el PC:\nadb shell pm grant io.xenxo.launcher android.permission.WRITE_SECURE_SETTINGS</string>
+    <string name="menu_close">Cerrar</string>
+
+    <string name="app_pin">Fijar al centro</string>
+    <string name="app_unpin">Quitar del centro</string>
+    <string name="app_move_in">Más al centro</string>
+    <string name="app_hide">Ocultar</string>
+    <string name="app_info">Info de la app</string>
+    <string name="app_drag_hint">Para cambiarla de sitio: mantén pulsado su icono y arrástralo</string>
+
+    <string name="lang_spanish">Castellano (respaldo: inglés)</string>
+    <string name="lang_english">Inglés (de fábrica)</string>
+    <string name="lang_current">Ahora: %1$s</string>
+    <string name="lang_no_permission">Faltan permisos. Desde el PC:\nadb shell pm grant io.xenxo.launcher android.permission.CHANGE_CONFIGURATION\nadb shell appops set io.xenxo.launcher WRITE_SETTINGS allow</string>
+    <string name="lang_failed">No se pudo cambiar el idioma: %1$s</string>
+    <string name="hidden_shown">Apps ocultas visibles otra vez</string>
+</resources>

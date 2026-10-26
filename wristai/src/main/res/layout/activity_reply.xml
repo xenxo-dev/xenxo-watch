@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <ScrollView
+        android:id="@+id/reply_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="74dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Encabezado con remitente y app -->
+            <TextView
+                android:id="@+id/reply_sender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#26C6DA"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <!-- Cuerpo del mensaje -->
+            <TextView
+                android:id="@+id/reply_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:lineSpacingExtra="2dp"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="#222222" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#888888"
+                android:textSize="11sp"
+                android:text="Respuestas rápidas:" />
+
+            <!-- Chips de respuesta rápida táctiles -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_reply_ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/bg_dash_card"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:text="👍 Vale / De acuerdo" />
+
+                <Button
+                    android:id="@+id/btn_reply_onmyway"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/bg_dash_card"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:text="🚶 Voy de camino" />
+
+                <Button
+                    android:id="@+id/btn_reply_calllater"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/bg_dash_card"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:text="⏰ Te llamo en 5 min" />
+
+                <Button
+                    android:id="@+id/btn_reply_gym"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/bg_dash_card"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:text="🏋️ Entrenando en el gym" />
+
+                <Button
+                    android:id="@+id/btn_reply_cant"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_dash_card"
+                    android:textAllCaps="false"
+                    android:textColor="#FF8A80"
+                    android:textSize="12sp"
+                    android:text="❌ Ahora no puedo hablar" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botón flotante inferior para dictado de voz -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#EE000000"
+        android:gravity="center"
+        android:paddingTop="6dp"
+        android:paddingBottom="8dp">
+
+        <Button
+            android:id="@+id/btn_reply_voice"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_chip"
+            android:minWidth="180dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textAllCaps="false"
+            android:textColor="#FFB300"
+            android:textSize="13sp"
+            android:text="🎤 Dictar respuesta" />
+    </LinearLayout>
+</FrameLayout>

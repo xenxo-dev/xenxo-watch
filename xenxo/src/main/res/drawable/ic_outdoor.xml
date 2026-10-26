@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Outdoor xenxo": círculo verde esmeralda (#34C759) con montañas y aguja de brújula -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#34C759" android:pathData="M24,1a23,23 0,1 1,0 46a23,23 0,1 1,0 -46z" />
+    <!-- Montañas blancas -->
+    <path android:fillColor="#FFFFFF" android:pathData="M14,33l8,-13 6,9 4,-5 6,9z" />
+    <!-- Sol / Brújula en la cima -->
+    <path android:fillColor="#FFFFFF" android:pathData="M24,10a3,3 0,1 1,0 6a3,3 0,1 1,0 -6z" />
+</vector>

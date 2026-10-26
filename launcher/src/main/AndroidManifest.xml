@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+    <!-- Necesario en Android 11+ para listar apps; en Android 9 se ignora -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <!-- "Idioma del sistema". No se conceden al instalar: se dan una vez con
+         adb shell pm grant io.xenxo.launcher android.permission.CHANGE_CONFIGURATION
+         adb shell appops set io.xenxo.launcher WRITE_SETTINGS allow -->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <!-- Ajustes → "Levantar muñeca" (Settings.Secure). Se da con
+         adb shell pm grant io.xenxo.launcher android.permission.WRITE_SECURE_SETTINGS -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER_COMPONENT"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- Esferas. WAKE_LOCK lo usa la librería wearable para pintar en ambiente (un instante por minuto). -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Pasos, kcal, km y pulso de las complicaciones de Mi Fitness. Se da con
+         adb shell pm grant io.xenxo.launcher com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA -->
+    <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA" />
+    <uses-permission android:name="com.xiaomi.wear.permission.READ_FITNESS" />
+    <!-- Lectura protegida por firma de HealthProvider de :xenxo -->
+    <uses-permission android:name="io.xenxo.permission.READ_HEALTH" />
+    <!-- Podómetro de hardware y sensores de salud para las esferas -->
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Xenxo">
+
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
+        <!-- Clases de Wear OS que la librería wearable usa en tiempo de ejecución (las pone el reloj) -->
+        <uses-library android:name="com.google.android.wearable" android:required="false" />
+
+        <service
+            android:name=".watchface.XenxoUltraFace"
+            android:exported="true"
+            android:label="@string/face_ultra"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <meta-data android:name="android.service.wallpaper" android:resource="@xml/watch_face" />
+            <meta-data android:name="com.google.android.wearable.watchface.preview" android:resource="@drawable/preview_digital" />
+            <meta-data android:name="com.google.android.wearable.watchface.preview_circular" android:resource="@drawable/preview_digital" />
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+                <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".watchface.XenxoDigitalFace"
+            android:exported="true"
+            android:label="@string/face_digital"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <meta-data android:name="android.service.wallpaper" android:resource="@xml/watch_face" />
+            <meta-data android:name="com.google.android.wearable.watchface.preview" android:resource="@drawable/preview_digital" />
+            <meta-data android:name="com.google.android.wearable.watchface.preview_circular" android:resource="@drawable/preview_digital" />
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+                <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".watchface.XenxoAnalogFace"
+            android:exported="true"
+            android:label="@string/face_analog"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <meta-data android:name="android.service.wallpaper" android:resource="@xml/watch_face" />
+            <meta-data android:name="com.google.android.wearable.watchface.preview" android:resource="@drawable/preview_analog" />
+            <meta-data android:name="com.google.android.wearable.watchface.preview_circular" android:resource="@drawable/preview_analog" />
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+                <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".watchface.UltraFacePreviewActivity"
+            android:exported="true"
+            android:label="xenxo Ultra Preview"
+            android:theme="@style/Theme.Xenxo" />
+
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:stateNotNeeded="true"
+            android:clearTaskOnLaunch="true"
+            android:excludeFromRecents="true"
+            android:resumeWhilePausing="true"
+            android:configChanges="locale|layoutDirection">
+
+            <!-- Como cajón y app de inicio principal (sustituto definitivo de T-Launcher) -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!-- Como app normal -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

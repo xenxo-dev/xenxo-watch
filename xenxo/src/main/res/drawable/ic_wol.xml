@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "WOL xenxo": círculo cian (#5AC8FA) con botón de encendido y señal Wi-Fi -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#5AC8FA" android:pathData="M24,1a23,23 0,1 1,0 46a23,23 0,1 1,0 -46z" />
+    <!-- Botón Power -->
+    <path android:fillColor="#FFFFFF" android:pathData="M22.5,10h3v12h-3z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M29.5,15.5a10,10 0,1 1,-11,0l1.8,2.4a7,7 0,1 0,7.4 0z" />
+</vector>

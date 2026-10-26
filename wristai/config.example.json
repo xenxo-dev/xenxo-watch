@@ -1,0 +1,17 @@
+{
+  "groq_key": "PON_AQUI_TU_CLAVE_DE_GROQ",
+  "gemini_key": "PON_AQUI_TU_CLAVE_DE_GEMINI",
+  "openai_key": "",
+  "anthropic_key": "",
+
+  "provider": "AUTO",
+  "stt": "groq",
+  "language": "es",
+  "tts": true,
+
+  "groq_model": "llama-3.3-70b-versatile",
+  "groq_stt_model": "whisper-large-v3-turbo",
+  "gemini_model": "gemini-3.5-flash",
+  "openai_model": "gpt-5.6-luna",
+  "claude_model": "claude-haiku-5-5"
+}

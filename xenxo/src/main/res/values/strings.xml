@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">xenxo</string>
+    <string name="section_power">Battery</string>
+    <string name="section_gym">Gym</string>
+    <string name="section_padel">Padel</string>
+    <string name="section_health">Health</string>
+
+    <!-- Profiles -->
+    <string name="profile_day">Day</string>
+    <string name="profile_night">Night</string>
+    <string name="profile_workout">Workout</string>
+    <string name="profile_saving">Extreme saving</string>
+    <string name="profile_restore">Restore defaults</string>
+
+    <string name="battery_level">Battery</string>
+    <string name="battery_temp">Temp</string>
+    <string name="battery_drain">Discharge</string>
+    <string name="adb_wifi_title">ADB via Wi-Fi</string>
+    <string name="adb_wifi_active">ACTIVE (Consumes battery)</string>
+    <string name="adb_wifi_off">Inactive</string>
+    <string name="btn_turn_off_wifi">Turn off Wi-Fi</string>
+    <string name="export_csv">Export CSV</string>
+    <string name="csv_exported">Saved to xenxo-bateria.csv</string>
+    <string name="perm_missing">ADB permissions missing</string>
+
+    <string name="yes">On</string>
+    <string name="no">Off</string>
+
+    <!-- Apps -->
+    <string name="padel_app">xenxoPadel</string>
+    <string name="app_energy">xenxoPower</string>
+    <string name="app_gym">xenxoGym</string>
+    <string name="app_health">xenxoHealth</string>
+    <string name="padel_history_open">Match history</string>
+    <string name="padel_us">Us</string>
+    <string name="padel_them">Them</string>
+    <string name="padel_new_match">New match</string>
+    <string name="padel_opt_golden">Golden point: %1$s</string>
+    <string name="padel_opt_third">Third set: %1$s</string>
+    <string name="padel_third_set">normal</string>
+    <string name="padel_third_stb">super tie-break</string>
+    <string name="padel_opt_server">First serve: %1$s</string>
+    <string name="padel_start">Start</string>
+    <string name="padel_paused">Match paused</string>
+    <string name="padel_continue">Continue</string>
+    <string name="padel_undo">Undo last point</string>
+    <string name="padel_finish_save">Finish and save</string>
+    <string name="padel_discard">Discard match</string>
+    <string name="padel_discard_q">Discard without saving?</string>
+    <string name="padel_discard_yes">Yes, discard</string>
+    <string name="padel_discard_no">No, keep playing</string>
+    <string name="padel_we_won">You won!</string>
+    <string name="padel_they_won">They won</string>
+    <string name="padel_save">Save match</string>
+    <string name="padel_undo_last">Undo the last point</string>
+    <string name="padel_duration">Duration: %1$d h %2$02d min</string>
+    <string name="padel_golden_point">GOLDEN POINT</string>
+    <string name="padel_tiebreak">TIE-BREAK</string>
+    <string name="padel_super_tiebreak">SUPER TIE-BREAK</string>
+    <string name="padel_change_ends">↔ CHANGE ENDS</string>
+    <string name="padel_open">Open scoreboard</string>
+    <string name="padel_resume">Resume match · %1$s</string>
+    <string name="padel_history">Recent matches</string>
+    <string name="padel_no_history">No saved matches yet</string>
+    <string name="padel_won">Won</string>
+    <string name="padel_lost">Lost</string>
+    <string name="padel_unfinished">Unfinished</string>
+    <string name="padel_export">Export CSV</string>
+    <string name="padel_exported">Saved to xenxo-padel.csv</string>
+    <string name="padel_delete_q">Delete this match? Tap to confirm</string>
+
+    <!-- Music -->
+    <string name="app_music">xenxoMusic</string>
+    <string name="section_music">Music</string>
+    <string name="music_now_playing">Now Playing</string>
+    <string name="music_library">Library</string>
+    <string name="music_storage_info">%1$d/20 songs · Auto-renewal</string>
+    <string name="music_empty">No songs yet</string>
+    <string name="music_empty_desc">Keep up to 20 songs to listen with AirPods without phone</string>
+    <string name="music_airpods_connected">AirPods / BT connected</string>
+    <string name="music_speaker_output">Watch speaker</string>
+    <string name="music_delete_track_q">Delete song? Tap to confirm</string>
+
+    <!-- Browser -->
+    <string name="app_browser">xenxoBrowser</string>
+    <string name="browser_title">Browser</string>
+    <string name="browser_captive_title">Wi-Fi Captive Portal</string>
+    <string name="browser_captive_desc">Forces hotel / gym Wi-Fi login without SSL errors</string>
+    <string name="browser_home">Home</string>
+    <string name="browser_search_or_url">Search or enter URL…</string>
+    <string name="browser_dark_mode">AMOLED Dark Mode</string>
+
+    <!-- Tesla Suite -->
+    <string name="app_tesla">xenxoTesla</string>
+    <string name="tesla_card_name">Tesla Key Card</string>
+    <string name="tesla_card_desc">Emulates physical Tesla Key Card over NFC</string>
+    <string name="tesla_key_ready">Key Card Ready</string>
+    <string name="tesla_key_instructions">Tap watch on B-pillar to unlock or center console to drive</string>
+    <string name="tesla_climate_title">Climate Control</string>
+    <string name="tesla_climate_on">Climate ON</string>
+    <string name="tesla_climate_off">Climate OFF</string>
+    <string name="tesla_frunk">Open Frunk</string>
+    <string name="tesla_trunk">Open Trunk</string>
+    <string name="tesla_lock">Lock</string>
+    <string name="tesla_unlock">Unlock</string>
+    <string name="tesla_honk">Honk &amp; Flash</string>
+
+    <!-- Intervals -->
+    <string name="app_intervals">xenxoIntervals</string>
+    <string name="intervals_title">Intervals</string>
+    <string name="intervals_work">WORK</string>
+    <string name="intervals_rest">REST</string>
+    <string name="intervals_prepare">GET READY</string>
+    <string name="intervals_round">Round %1$d/%2$d</string>
+    <string name="intervals_finished">WORKOUT COMPLETE!</string>
+
+    <!-- Outdoor -->
+    <string name="app_outdoor">xenxoOutdoor</string>
+    <string name="outdoor_title">Mountain &amp; Compass</string>
+    <string name="outdoor_altitude">Altitude</string>
+    <string name="outdoor_pressure">Pressure</string>
+    <string name="outdoor_compass">Compass</string>
+    <string name="outdoor_calibrated">QNH Calibrated</string>
+
+    <!-- Remote -->
+    <string name="app_remote">xenxoRemote</string>
+    <string name="remote_title">Multimedia Remote</string>
+
+    <!-- WOL -->
+    <string name="app_wol">xenxoWol</string>
+    <string name="wol_title">Wake-on-LAN</string>
+    <string name="wol_sent">Magic packet sent!</string>
+
+    <!-- Game -->
+    <string name="app_game">xenxoRun</string>
+    <string name="game_title">Ruta xenxo</string>
+
+    <!-- Notes -->
+    <string name="app_notes">xenxoNotes</string>
+    <string name="notes_title">Notas xenxo</string>
+</resources>

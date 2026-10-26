@@ -1,0 +1,3 @@
+﻿system screen_brightness 134
+global wifi_wakeup_enabled 1
+global mobile_data 1

@@ -1,0 +1,21 @@
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+config.json
+tesla_config.json
+*.vdex
+*.odex
+
+# Informes del reloj: llevan MAC de Bluetooth y datos de la cuenta
+scripts/diagnostico-reloj-*.txt
+scripts/ajustes-diagnostico-*.txt
+scripts/mediciones/
+backups/
+*.apk
+*.csv
+*.log
+
+# Plan de trabajo local para los agentes (lleva IP del reloj y serial del móvil)
+PLAN-*.md

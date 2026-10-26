@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Gym xenxo": círculo verde (paleta tipo openGym) con mancuerna blanca -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#30D158" android:pathData="M24,1a23,23 0,1 1,0 46a23,23 0,1 1,0 -46z" />
+    <!-- barra -->
+    <path android:fillColor="#FFFFFF" android:pathData="M15,22.5h18v3H15z" />
+    <!-- discos (de dentro a fuera) -->
+    <path android:fillColor="#FFFFFF" android:pathData="M13,15.5h4a1.5,1.5 0,0 1,1.5 1.5v14a1.5,1.5 0,0 1,-1.5 1.5h-4a1.5,1.5 0,0 1,-1.5 -1.5V17a1.5,1.5 0,0 1,1.5 -1.5z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M31,15.5h4a1.5,1.5 0,0 1,1.5 1.5v14a1.5,1.5 0,0 1,-1.5 1.5h-4a1.5,1.5 0,0 1,-1.5 -1.5V17a1.5,1.5 0,0 1,1.5 -1.5z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M8.5,19h2a1,1 0,0 1,1 1v8a1,1 0,0 1,-1 1h-2a1,1 0,0 1,-1 -1v-8a1,1 0,0 1,1 -1z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M37.5,19h2a1,1 0,0 1,1 1v8a1,1 0,0 1,-1 1h-2a1,1 0,0 1,-1 -1v-8a1,1 0,0 1,1 -1z" />
+</vector>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Negro puro AMOLED para cero consumo en reposo -->
+    <style name="Theme.Xenxo" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowShowWallpaper">false</item>
+        <item name="android:windowSwipeToDismiss">true</item>
+    </style>
+
+    <!-- Marcador de pádel: sin "deslizar para cerrar" (un toque arrastrado en plena pista sacaría del
+         marcador). Se sale con el botón; el partido queda guardado igualmente. -->
+    <style name="Theme.Xenxo.Padel">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+
+    <!-- Videojuego "Ruta xenxo": sin deslizar para cerrar para permitir mover el carril a la derecha -->
+    <style name="Theme.Xenxo.Game" parent="Theme.Xenxo">
+        <item name="android:windowSwipeToDismiss">false</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+</resources>
