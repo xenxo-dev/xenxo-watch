@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">xenxo Suite</string>
+    <string name="title_gym">Gym</string>
+    <string name="title_padel">Padel</string>
+    <string name="title_health">Health</string>
+    <string name="title_tesla">Tesla</string>
+</resources>
