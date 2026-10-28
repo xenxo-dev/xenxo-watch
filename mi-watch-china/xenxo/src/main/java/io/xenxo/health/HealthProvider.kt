@@ -86,6 +86,7 @@ class HealthProvider : ContentProvider() {
     private fun getDailyBundle(ctx: Context): Bundle {
         val db = HealthDb(ctx)
         val manager = HealthManager(ctx)
+        manager.checkDayRollover()
         val today = manager.todayStr()
         val record = db.getDaily(today)
         val b = Bundle()
@@ -112,13 +113,14 @@ class HealthProvider : ContentProvider() {
 
     private fun getHealthContextBundle(ctx: Context): Bundle {
         val b = Bundle()
-        val fmtDay = SimpleDateFormat("yyyy-MM-dd", Locale("es", "ES"))
+        val fmtDay = SimpleDateFormat("yyyy-MM-dd", Locale.ROOT)
         val now = Date()
         val todayStr = fmtDay.format(now)
 
         // 1. Salud hoy
         val healthDb = HealthDb(ctx)
         val healthMgr = HealthManager(ctx)
+        healthMgr.checkDayRollover()
         val healthRec = healthDb.getDaily(todayStr)
         val steps = if (healthMgr.currentSteps > 0) healthMgr.currentSteps else (healthRec?.steps ?: 0)
         val kcal = if (healthMgr.currentKcal > 0) healthMgr.currentKcal else (healthRec?.kcal ?: 0)

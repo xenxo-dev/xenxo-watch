@@ -35,6 +35,7 @@ class HealthManager(private val ctx: Context) : SensorEventListener {
     var onHeartRateUpdate: ((bpm: Int, status: String) -> Unit)? = null
 
     init {
+        checkDayRollover()
         val today = todayStr()
         val cached = prefs.getInt("cached_steps", 0)
         if (prefs.getString("cached_day", "") == today && cached > 0) {
@@ -48,8 +49,34 @@ class HealthManager(private val ctx: Context) : SensorEventListener {
                 currentSteps = record.steps
                 currentKcal = record.kcal
                 currentKm = record.km
+            } else {
+                currentSteps = 0
+                currentKcal = 0
+                currentKm = 0f
             }
         }
+    }
+
+    /** Comprueba cambio de día a medianoche y resetea métricas a 0 */
+    fun checkDayRollover(): Boolean {
+        val today = todayStr()
+        val cachedDay = prefs.getString("cached_day", "") ?: ""
+        if (cachedDay.isNotEmpty() && cachedDay != today) {
+            val last = prefs.getLong("last", 0L)
+            prefs.edit()
+                .putString("cached_day", today)
+                .putLong("base", last)
+                .putLong("carry", 0L)
+                .putInt("cached_steps", 0)
+                .apply()
+            currentSteps = 0
+            currentKcal = 0
+            currentKm = 0f
+            db.upsertSteps(today, 0, 0, 0f, io.xenxo.profile.UserProfile.get(ctx).stepGoal)
+            ctx.sendBroadcast(android.content.Intent("io.xenxo.HEALTH_UPDATED"))
+            return true
+        }
+        return false
     }
 
     /**
@@ -85,6 +112,7 @@ class HealthManager(private val ctx: Context) : SensorEventListener {
     }
 
     fun startListeningSteps() {
+        checkDayRollover()
         stepSensor?.let {
             sm.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL, 60_000_000)
         }
@@ -130,22 +158,27 @@ class HealthManager(private val ctx: Context) : SensorEventListener {
             Sensor.TYPE_STEP_COUNTER -> {
                 val raw = event.values[0].toLong()
                 val today = todayStr()
+                val cachedDay = prefs.getString("cached_day", "") ?: ""
                 var base = prefs.getLong("base", raw)
-                var carry = prefs.getLong("carry", 0)
-                val last = prefs.getLong("last", raw)
+                var carry = prefs.getLong("carry", 0L)
+                var last = prefs.getLong("last", raw)
 
-                if (prefs.getString("cached_day", "") != today) {
-                    base = last
-                    carry = 0
-                }
-                if (raw < last) {
+                if (cachedDay != today) {
+                    if (raw < last) {
+                        base = 0L
+                    } else {
+                        base = last
+                    }
+                    carry = 0L
+                    last = raw
+                } else if (raw < last) {
                     // Reloj reiniciado
-                    carry += last - base
-                    base = 0
+                    carry += (last - base).coerceAtLeast(0L)
+                    base = 0L
                 }
 
                 val profile = io.xenxo.profile.UserProfile.get(ctx)
-                val steps = (carry + raw - base).coerceAtLeast(0).toInt()
+                val steps = (carry + raw - base).coerceAtLeast(0L).toInt()
                 val kcal = estimateKcal(steps, profile.weightKg)
                 val km = estimateKm(steps, profile.heightCm)
 

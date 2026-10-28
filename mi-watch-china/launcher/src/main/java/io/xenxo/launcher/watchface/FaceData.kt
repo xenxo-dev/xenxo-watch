@@ -45,6 +45,7 @@ class FaceData(private val ctx: Context, private val onChange: () -> Unit) : Sen
     private val stepSensor = sm?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     private val prefs = ctx.getSharedPreferences("face_steps", Context.MODE_PRIVATE)
     private val dayFmt = SimpleDateFormat("yyyy-MM-dd", Locale.ROOT)
+    private var currentDay: String = dayFmt.format(Date())
     private var isListeningSteps = false
 
     private var healthReceiverRegistered = false
@@ -54,8 +55,49 @@ class FaceData(private val ctx: Context, private val onChange: () -> Unit) : Sen
         }
     }
 
+    init {
+        checkDayRollover()
+        val today = dayFmt.format(Date())
+        if (prefs.getString("cached_day", "") == today) {
+            val s = prefs.getInt("cached_steps", 0)
+            if (s >= 0) {
+                steps = s
+                kcal = Math.round(s * userWeight * KCAL_PER_STEP_KG)
+                km = (s * userHeight * STRIDE_PER_CM / 100_000f * 10f).roundToInt() / 10f
+            }
+        }
+    }
+
+    /**
+     * Comprueba si ha cambiado de día (medianoche). Si es así, resetea métricas a 0 inmediatamente.
+     */
+    fun checkDayRollover(): Boolean {
+        val today = dayFmt.format(Date())
+        val cachedDay = prefs.getString("cached_day", "") ?: ""
+        if ((cachedDay.isNotEmpty() && cachedDay != today) || (currentDay.isNotEmpty() && currentDay != today)) {
+            android.util.Log.i("FaceData", "Day rollover detected: cachedDay=$cachedDay currentDay=$currentDay -> today=$today")
+            val last = prefs.getLong("last", 0L)
+            prefs.edit()
+                .putString("cached_day", today)
+                .putLong("base", last)
+                .putLong("carry", 0L)
+                .putInt("cached_steps", 0)
+                .apply()
+            steps = 0
+            kcal = 0
+            km = 0f
+            currentDay = today
+            onChange()
+            syncStepsToProvider(0, 0, 0f, last)
+            return true
+        }
+        currentDay = today
+        return false
+    }
+
     /** Consulta autoritativa al HealthProvider nativo del reloj */
     fun readFromXenxoHealth(): Boolean {
+        checkDayRollover()
         return try {
             val res = ctx.contentResolver.call(
                 android.net.Uri.parse("content://io.xenxo.health.provider"),
@@ -64,6 +106,8 @@ class FaceData(private val ctx: Context, private val onChange: () -> Unit) : Sen
                 null
             ) ?: return false
 
+            val today = dayFmt.format(Date())
+            val xDate = res.getString("date") ?: ""
             val w = res.getFloat("weightKg", userWeight)
             val h = res.getFloat("heightCm", userHeight)
             val g = res.getInt("goalSteps", stepGoal)
@@ -75,7 +119,7 @@ class FaceData(private val ctx: Context, private val onChange: () -> Unit) : Sen
             val xKcal = res.getInt("kcal", -1)
             val xKm = res.getFloat("km", -1f)
             val xBpm = res.getInt("lastBpm", -1)
-            android.util.Log.i("FaceData", "readFromXenxoHealth: xSteps=$xSteps, xKcal=$xKcal, xKm=$xKm, xBpm=$xBpm")
+            android.util.Log.i("FaceData", "readFromXenxoHealth: date=$xDate today=$today xSteps=$xSteps, xKcal=$xKcal, xKm=$xKm, xBpm=$xBpm")
 
             var changed = false
             // Pulso cardíaco
@@ -84,16 +128,26 @@ class FaceData(private val ctx: Context, private val onChange: () -> Unit) : Sen
                 changed = true
             }
 
-            // Pasos, calorías y distancia: inicializar si aún no tenemos lectura o si el proveedor trae un dato mayor
-            if (xSteps >= 0 && (steps < 0 || xSteps > steps)) {
-                steps = xSteps
-                if (!kcalFromXiaomi || kcal < 0) {
-                    kcal = if (xKcal >= 0) xKcal else Math.round(steps * userWeight * KCAL_PER_STEP_KG)
+            // Si la fecha devuelta por el proveedor no es la de hoy, ignorar pasos de días previos
+            if (xDate.isNotEmpty() && xDate != today) {
+                if (steps != 0) {
+                    steps = 0
+                    kcal = 0
+                    km = 0f
+                    changed = true
                 }
-                if (!kmFromXiaomi || km < 0f) {
-                    km = if (xKm >= 0f) xKm else (steps * userHeight * STRIDE_PER_CM / 100_000f * 10f).roundToInt() / 10f
+            } else if (xSteps >= 0) {
+                // Si la fecha es hoy: inicializar si aún no tenemos lectura o si el proveedor trae un dato mayor
+                if (steps < 0 || xSteps > steps) {
+                    steps = xSteps
+                    if (!kcalFromXiaomi || kcal < 0) {
+                        kcal = if (xKcal >= 0) xKcal else Math.round(steps * userWeight * KCAL_PER_STEP_KG)
+                    }
+                    if (!kmFromXiaomi || km < 0f) {
+                        km = if (xKm >= 0f) xKm else (steps * userHeight * STRIDE_PER_CM / 100_000f * 10f).roundToInt() / 10f
+                    }
+                    changed = true
                 }
-                changed = true
             }
 
             if (changed) {
@@ -135,6 +189,7 @@ class FaceData(private val ctx: Context, private val onChange: () -> Unit) : Sen
     }
 
     fun refresh() {
+        checkDayRollover()
         readFromXenxoHealth()
     }
 
@@ -154,6 +209,7 @@ class FaceData(private val ctx: Context, private val onChange: () -> Unit) : Sen
 
     /** Mientras la esfera es visible (también en modo ambiente). */
     fun start() {
+        checkDayRollover()
         readFromXenxoHealth()
         if (!healthReceiverRegistered) {
             try {
@@ -199,25 +255,24 @@ class FaceData(private val ctx: Context, private val onChange: () -> Unit) : Sen
         if (event.sensor.type == Sensor.TYPE_STEP_COUNTER) {
             val raw = event.values[0].toLong()
             val today = dayFmt.format(Date())
+            val cachedDay = prefs.getString("cached_day", "") ?: ""
             var base = prefs.getLong("base", raw)
             var carry = prefs.getLong("carry", 0L)
-            val last = prefs.getLong("last", raw)
-            val cachedDay = prefs.getString("cached_day", "")
+            var last = prefs.getLong("last", raw)
 
             if (cachedDay != today) {
                 // Nuevo día
-                base = last
+                if (raw < last) {
+                    base = 0L
+                } else {
+                    base = last
+                }
                 carry = 0L
-            }
-            if (raw < last) {
-                // Reloj reiniciado a mitad del día
-                carry += (last - base)
+                last = raw
+            } else if (raw < last) {
+                // Reloj reiniciado durante el día
+                carry += (last - base).coerceAtLeast(0L)
                 base = 0L
-            }
-
-            // Si es primer arranque en este día y ya había pasos en DB, alinear la base
-            if (cachedDay != today && steps > 0 && (raw - base) <= 0) {
-                base = if (raw >= steps) raw - steps else 0L
             }
 
             val s = (carry + raw - base).coerceAtLeast(0L).toInt()
@@ -228,6 +283,7 @@ class FaceData(private val ctx: Context, private val onChange: () -> Unit) : Sen
             steps = s
             kcal = k
             km = m
+            currentDay = today
 
             prefs.edit()
                 .putString("cached_day", today)
